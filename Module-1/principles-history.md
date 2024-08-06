@@ -79,31 +79,55 @@ Abre `res/layout/activity_main.xml` y reemplaza su contenido con:
 
 Abre `MainActivity.java` (o `MainActivity.kt` si estás usando Kotlin) y reemplaza su contenido con:
 
-```java
-import android.os.Build;
-import android.os.Bundle;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+```kotlin
+package com.example.myapplication
 
-public class MainActivity extends AppCompatActivity {
+import android.os.Build
+import android.os.Bundle
+import android.widget.TextView
+import androidx.activity.ComponentActivity
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        TextView tvDeviceInfo = findViewById(R.id.tvDeviceInfo);
-        tvDeviceInfo.setText(getDeviceInfo());
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val tvDeviceInfo: TextView = findViewById(R.id.tvDeviceInfo)
+        tvDeviceInfo.text = getDeviceInfo()
+
+        val tvCameraInfo: TextView = findViewById(R.id.tvCameraInfo)
+        tvCameraInfo.text = getCameraInfo()
     }
 
-    private String getDeviceInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Modelo: ").append(Build.MODEL).append("\n");
-        sb.append("Fabricante: ").append(Build.MANUFACTURER).append("\n");
-        sb.append("Versión de Android: ").append(Build.VERSION.RELEASE).append("\n");
-        sb.append("SDK: ").append(Build.VERSION.SDK_INT).append("\n");
-        sb.append("Procesador: ").append(Build.HARDWARE).append("\n");
-        return sb.toString();
+    private fun getDeviceInfo(): String {
+        val sb = StringBuilder()
+        sb.append("Modelo: ").append(Build.MODEL).append("\n")
+        sb.append("Fabricante: ").append(Build.MANUFACTURER).append("\n")
+        sb.append("Versión de Android: ").append(Build.VERSION.RELEASE).append("\n")
+        sb.append("SDK: ").append(Build.VERSION.SDK_INT).append("\n")
+        sb.append("Procesador: ").append(Build.HARDWARE).append("\n")
+        sb.append("Display Info: ").append(Build.DISPLAY).append("\n")
+        sb.append("Densidad:").append(resources.displayMetrics.densityDpi).append(" DPI \n")
+        sb.append("Ram: ").append(Runtime.getRuntime().totalMemory()/(1024 * 1024)).append(" MB \n")
+
+        return sb.toString()
+    }
+
+    private fun getCameraInfo(): String {
+        val cameraInfo = StringBuilder()
+        val cameraManager = getSystemService(CAMERA_SERVICE) as android.hardware.camera2.CameraManager
+        cameraManager.cameraIdList.forEachIndexed {index, id ->
+            val characteristics = cameraManager.getCameraCharacteristics(id)
+            val facing = characteristics.get(android.hardware.camera2.CameraCharacteristics.LENS_FACING)
+            val facingString = when(facing) {
+                android.hardware.camera2.CameraCharacteristics.LENS_FACING_FRONT -> "Frontal"
+                android.hardware.camera2.CameraCharacteristics.LENS_FACING_BACK -> "Trasera"
+                else -> "Otra"
+            }
+            cameraInfo.append("Camara ${index + 1}: $facingString\n" )
+        }
+        return cameraInfo.toString()
     }
 }
 ```

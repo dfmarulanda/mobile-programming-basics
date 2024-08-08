@@ -1,4 +1,4 @@
-# 1.1 Principios de la tecnología móvil
+# Principios de la tecnología móvil
 
 ## Objetivos de aprendizaje
 - Comprender la evolución de la tecnología móvil

@@ -113,7 +113,7 @@ Markdown es un lenguaje de marcado ligero que permite formatear texto de manera 
 Para crear la versión inicial del proyecto:
 1. Abran Android Studio y creen un nuevo proyecto.
 2. Configuren el proyecto con una actividad vacía (Empty Activity).
-3. Una vez creado, vayan a VCS > Share Project on GitHub.
+3. Recuerden las instrucciones que vimos la clase pasada sobre crear repositorios en Github. 
 4. Sigan las instrucciones para subir el proyecto a su repositorio de GitHub.
 
 Recuerden que este README.md es un documento vivo que pueden ir actualizando a medida que su proyecto evolucione. Lo importante es tener una visión clara de lo que quieren lograr con su aplicación.

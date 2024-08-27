@@ -12,7 +12,7 @@ Instrucciones:
 
 3. En el archivo README.md de su repositorio, escriban una descripción de la aplicación que van a desarrollar. Usen formato Markdown para estructurar el contenido (más detalles sobre Markdown abajo).
 
-4. Creen una versión inicial del proyecto en Android Studio y súbanla al repositorio.
+4. Creen una versión inicial del proyecto en Android Studio (sigan las instrucciones de la clase hello-world.md) y súbanla al repositorio.
 
 Instrucciones específicas para el README.md:
 
